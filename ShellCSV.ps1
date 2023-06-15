@@ -1,8 +1,7 @@
 <#
     Script Name: ShellCSV.ps1
-    Author: Unspecified
-    Last Updated: Unspecified
-    Version: Unspecified
+    Author: Michael Haag
+    Version: 0.1
     Description:
         "ShellCSV" is a PowerShell tool designed to scan directories for potential webshells and report on their entropy and hash values. Like ShellSweep, it uses entropy as an indicator of potential webshell files.
 

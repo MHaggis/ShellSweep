@@ -1,8 +1,8 @@
 <#
     Script Name: ShellScan.ps1
-    Author: Unspecified
+    Author: Michael Haag
     Last Updated: Unspecified
-    Version: Unspecified
+    Version: 0.1
     Description:
         "ShellScan" is a PowerShell script that calculates and reports entropy statistics for files grouped by extension in specified directories. This script provides an expanded functionality over the previous scripts by including statistical analysis of the entropy values.
 

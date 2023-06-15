@@ -1,7 +1,6 @@
 <#
     Script Name: ShellSweep.ps1
     Author: Michael Haag
-    Last Updated: Unspecified
     Version: 0.1
     Description:
         "ShellSweep" is a PowerShell tool designed to detect potential webshell files in a specified directory. 
