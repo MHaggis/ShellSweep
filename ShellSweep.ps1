@@ -133,7 +133,8 @@ foreach ($DirectoryPath in $DirectoryPaths) {
                 }
 
                 if ($metCondition -and $hash -notin $ignoreHashes) {
-                    Write-Output "Possible webshell found: $($_.FullName), Entropy: $entropy, Hash: $hash"
+                    $lastModified = $_.LastWriteTime
+                    Write-Output "Possible webshell found: $($_.FullName), Entropy: $entropy, Hash: $hash, Last Modified: $lastModified"
                     $webshellFound = $true
                 }
             }

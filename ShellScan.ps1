@@ -1,7 +1,6 @@
 <#
     Script Name: ShellScan.ps1
     Author: Michael Haag
-    Last Updated: Unspecified
     Version: 0.1
     Description:
         "ShellScan" is a PowerShell script that calculates and reports entropy statistics for files grouped by extension in specified directories. This script provides an expanded functionality over the previous scripts by including statistical analysis of the entropy values.
@@ -57,11 +56,12 @@ foreach ($directoryPath in $directoryPaths) {
         $content = Get-Content $_.FullName -Raw
         $entropy = Get-Entropy -String $content
         $extension = $_.Extension
+        $lastModified = $_.LastWriteTime
         if (-not $entropyValuesByExtension.ContainsKey($extension)) {
             $entropyValuesByExtension[$extension] = @()
         }
         $entropyValuesByExtension[$extension] += $entropy
-        Write-Output "$($_.FullName): $entropy"
+        Write-Output "$($_.FullName) - Last Modified: ${lastModified}: Entropy: $entropy"
     }
 }
 

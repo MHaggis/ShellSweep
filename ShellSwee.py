@@ -2,6 +2,8 @@ import os
 import hashlib
 import math
 from collections import Counter
+import datetime
+
 
 print("""\
    _________         _________
@@ -77,6 +79,9 @@ for directory_path in directory_paths:
                     hasher.update(content.encode())
                     file_hash = hasher.hexdigest()
 
+                    # get last modification time
+                    last_modified = datetime.datetime.fromtimestamp(os.path.getmtime(full_path))
+
                     for extension, conditions in file_extensions.items():
                         if file.endswith(extension):
                             for operation, value in conditions:
@@ -86,8 +91,9 @@ for directory_path in directory_paths:
                                 elif operation == 'lt' and entropy < value:
                                     met_condition = True
                                 if met_condition and file_hash not in ignore_hashes:
-                                    print(f"Possible webshell found: {full_path}, Entropy: {entropy}, Hash: {file_hash}")
+                                    print(f"Possible webshell found: {full_path}, Last Modified: {last_modified}, Entropy: {entropy}, Hash: {file_hash}")
                                     webshell_found = True
+
 
 # If no webshells were found -->
 if not webshell_found:

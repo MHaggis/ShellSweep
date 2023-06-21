@@ -65,6 +65,7 @@ foreach ($DirectoryPath in $DirectoryPaths) {
         $content = Get-Content $_.FullName -Raw
         $entropy = Get-Entropy -String $content
         $hash = (Get-FileHash $_.FullName -Algorithm SHA256).Hash
+        $lastModified = $_.LastWriteTime
 
         # Add the file's details to the results array
         $results += New-Object PSObject -Property @{
@@ -72,6 +73,7 @@ foreach ($DirectoryPath in $DirectoryPaths) {
             FullName = $_.FullName
             Entropy = $entropy
             Hash = $hash
+            LastModified = $lastModified
         }
     }
 }
