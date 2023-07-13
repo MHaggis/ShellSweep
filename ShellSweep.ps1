@@ -133,8 +133,16 @@ foreach ($DirectoryPath in $DirectoryPaths) {
                 }
 
                 if ($metCondition -and $hash -notin $ignoreHashes) {
-                    $lastModified = $_.LastWriteTime
-                    Write-Output "Possible webshell found: $($_.FullName), Entropy: $entropy, Hash: $hash, Last Modified: $lastModified"
+                    $lastModified = $_.LastWriteTime.ToString("yyyy-MM-ddTHH:mm:ssZ")
+                    # Create a new object and add it to the results array
+                    $result = New-Object PSObject -Property @{
+                        'FilePath' = $_.FullName
+                        'Entropy' = $entropy
+                        'Hash' = $hash
+                        'LastModified' = $lastModified
+                    }
+                    # Convert the result to JSON and output to stdout
+                    $result | ConvertTo-Json -Compress
                     $webshellFound = $true
                 }
             }
@@ -143,5 +151,10 @@ foreach ($DirectoryPath in $DirectoryPaths) {
 }
 # If no webshells were found -->
 if (-not $webshellFound) {
-    Write-Output "No evil identified today."
+    # Create a special result
+    $result = New-Object PSObject -Property @{
+        'Message' = "No evil identified today."
+    }
+    # Convert the result to JSON and output to stdout
+    $result | ConvertTo-Json -Compress
 }
